@@ -9,6 +9,7 @@ public class Fire : MonoBehaviour
     private float[] startIntensities = new float[0];
     [SerializeField] private ParticleSystem steamParticleSystem;
     private float startIntensitiesSteam;
+    private ParticleSystemRenderer steamParticleRenderer;
 
 
     private float timeLastWatered = 0f;
@@ -29,6 +30,8 @@ public class Fire : MonoBehaviour
 
         var steamEmission = steamParticleSystem.emission;
         steamEmission.enabled = false;
+        steamParticleRenderer = steamParticleSystem.gameObject.GetComponent<ParticleSystemRenderer>();
+        steamParticleRenderer.enabled = false;
     }
 
 
@@ -38,6 +41,7 @@ public class Fire : MonoBehaviour
         {
             currentIntensity += regenerateRate * Time.deltaTime;
             HideSteam();
+            this.GetComponent<Collider>().enabled = true;
             ChangeIntensity();
         }
     }
@@ -53,6 +57,8 @@ public class Fire : MonoBehaviour
         {
             isLit = false;
             HideSteam();
+            this.GetComponent<Collider>().enabled = false;
+
             return true;   // Fire out
         }
         return false;
@@ -69,11 +75,12 @@ public class Fire : MonoBehaviour
 
     private void ShowSteam(Vector3 steamPosition)
     {
+        if (!steamParticleRenderer.enabled) steamParticleRenderer.enabled = true;
         var emission = steamParticleSystem.emission;
         emission.enabled = true;
         emission.rateOverTime = 1.0f * startIntensitiesSteam;
         steamParticleSystem.transform.position = steamPosition;
-        steamParticleSystem.transform.localPosition = new Vector3(steamParticleSystem.transform.localPosition.x, 0, steamParticleSystem.transform.localPosition.z);
+        // steamParticleSystem.transform.localPosition = new Vector3(steamParticleSystem.transform.localPosition.x, 0, steamParticleSystem.transform.localPosition.z);
     }
 
     private void HideSteam()

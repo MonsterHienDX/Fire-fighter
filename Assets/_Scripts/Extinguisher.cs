@@ -7,12 +7,14 @@ public class Extinguisher : MonoBehaviour
     [SerializeField] private float amountExtinguishedPerSecond;
     [SerializeField] private Transform waterTapTransform;
     [SerializeField] private ParticleSystem waterParticleSystem;
-
+    private ParticleSystemRenderer waterParticleRenderer;
     private float startWaterIntensity;
 
     private void Start()
     {
         startWaterIntensity = waterParticleSystem.emission.rateOverTime.constant;
+        waterParticleRenderer = waterParticleSystem.gameObject.GetComponent<ParticleSystemRenderer>();
+        waterParticleRenderer.enabled = false;
     }
 
 
@@ -32,11 +34,10 @@ public class Extinguisher : MonoBehaviour
 
     private void FireWater()
     {
-        SetWaterDirection();
+        if (!waterParticleRenderer.enabled) waterParticleRenderer.enabled = true;
 
-        var emission = waterParticleSystem.emission;
-        if (!emission.enabled) emission.enabled = true;
-        emission.rateOverTime = 1.0f * startWaterIntensity;
+        SetWaterDirection();
+        // var emission = waterParticleSystem.emission;
 
         if (
             Physics.Raycast(this.transform.position, this.transform.forward, out RaycastHit hit, 100f)
@@ -52,8 +53,9 @@ public class Extinguisher : MonoBehaviour
 
     private void StopWater()
     {
-        var emission = waterParticleSystem.emission;
-        emission.rateOverTime = 0.0f * startWaterIntensity;
+        waterParticleRenderer.enabled = false;
+        // var emission = waterParticleSystem.emission;
+        // emission.rateOverTime = 0.0f * startWaterIntensity;
     }
 
     private void SetWaterDirection()
