@@ -5,12 +5,17 @@ using UnityEngine;
 public class Fire : MonoBehaviour
 {
     [SerializeField, Range(0f, 1f)] private float currentIntensity = 1.0f;
-    [SerializeField] private ParticleSystem[] fireParticleSystems = new ParticleSystem[0];
-    private float[] startIntensities = new float[0];
+    [SerializeField] private ParticleSystem fireParticleSystem;
+    private float startIntensity;
+    private Vector3 startFireScale;
+
+
+
     [SerializeField] private ParticleSystem steamParticleSystem;
     private float startIntensitiesSteam;
     private ParticleSystemRenderer steamParticleRenderer;
 
+    [SerializeField] private ParticleSystem smokeParticleSystem;
 
     private float timeLastWatered = 0f;
     [SerializeField] private float regenerateDelay;
@@ -20,18 +25,16 @@ public class Fire : MonoBehaviour
 
     private void Start()
     {
-        startIntensities = new float[fireParticleSystems.Length];
-        for (int i = 0; i < fireParticleSystems.Length; i++)
-        {
-            startIntensities[i] = fireParticleSystems[i].emission.rateOverTime.constant;
-        }
-
+        startIntensity = fireParticleSystem.emission.rateOverTime.constant;
+        startFireScale = fireParticleSystem.gameObject.transform.localScale;
         startIntensitiesSteam = steamParticleSystem.emission.rateOverTime.constant;
 
         var steamEmission = steamParticleSystem.emission;
         steamEmission.enabled = false;
         steamParticleRenderer = steamParticleSystem.gameObject.GetComponent<ParticleSystemRenderer>();
         steamParticleRenderer.enabled = false;
+
+        smokeParticleSystem.Pause();
     }
 
 
@@ -55,22 +58,27 @@ public class Fire : MonoBehaviour
         ShowSteam(collidePoint);
         if (currentIntensity <= 0)
         {
-            isLit = false;
-            HideSteam();
-            this.GetComponent<Collider>().enabled = false;
-
-            return true;   // Fire out
+            FireOut();
+            return true;
         }
         return false;
 
     }
     private void ChangeIntensity()
     {
-        for (int i = 0; i < fireParticleSystems.Length; i++)
-        {
-            var emission = fireParticleSystems[i].emission;
-            emission.rateOverTime = currentIntensity * startIntensities[i];
-        }
+        var emission = fireParticleSystem.emission;
+        emission.rateOverTime = currentIntensity * startIntensity;
+
+        Vector3 scale = currentIntensity * startFireScale;
+        fireParticleSystem.gameObject.transform.localScale = scale;
+    }
+
+    private void FireOut()
+    {
+        isLit = false;
+        HideSteam();
+        this.GetComponent<Collider>().enabled = false;
+        smokeParticleSystem.Play();
     }
 
     private void ShowSteam(Vector3 steamPosition)
