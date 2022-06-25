@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Extinguisher : MonoBehaviour
+public class Extinguisher : SingletonMonobehaviour<Extinguisher>
 {
-    [SerializeField] private float amountExtinguishedPerSecond;
     [SerializeField] private Transform waterTapTransform;
     [SerializeField] private ParticleSystem waterParticleSystem;
     private ParticleSystemRenderer waterParticleRenderer;
     [SerializeField] private bool useTurnOnRenderer;
 
     [SerializeField] private float waterCapacity;
+
     private float currentWaterAmount;
     [SerializeField] private Image waterAmountUI;
 
@@ -29,9 +29,9 @@ public class Extinguisher : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetMouseButton(0))
         {
+            SetWaterTapDirection();
             if (currentWaterAmount > 0)
             {
                 FireWater();
@@ -41,6 +41,7 @@ public class Extinguisher : MonoBehaviour
             else
             {
                 StopWater();
+                EventDispatcher.Instance.PostEvent(EventID.OutOfWater);
             }
         }
 
@@ -62,8 +63,6 @@ public class Extinguisher : MonoBehaviour
         // burst.cycleCount = 0;
         emission.SetBurst(0, burst);
 
-        SetWaterDirection();
-
         if (
             Physics.Raycast(waterTapTransform.position, waterTapTransform.forward, out RaycastHit hit, 100f)
             && hit.collider.TryGetComponent(out Fire fire)
@@ -71,7 +70,7 @@ public class Extinguisher : MonoBehaviour
         {
 
             if (fire.isLit)
-                fire.TryExtinguish(amountExtinguishedPerSecond * Time.deltaTime, hit.point);
+                fire.TryExtinguish(hit.point);
         }
         Debug.DrawRay(waterTapTransform.position, waterTapTransform.forward * 1000, Color.red);
     }
@@ -93,13 +92,13 @@ public class Extinguisher : MonoBehaviour
         }
     }
 
-    private void SetWaterDirection()
+    private void SetWaterTapDirection()
     {
         Vector3 lookAtPos =
             Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100));
-        waterTapTransform.LookAt(lookAtPos);
-        // ResetGunDirection();
 
+        waterTapTransform.LookAt(Vector3.Lerp(lookAtPos, this.transform.forward, .1f));
+        // ResetGunDirection();
     }
 
     private void ResetGunDirection()
@@ -108,5 +107,11 @@ public class Extinguisher : MonoBehaviour
             waterTapTransform.localRotation.w);
 
         waterTapTransform.localRotation = newRotate;
+    }
+
+    public void ReFillWater()
+    {
+        currentWaterAmount = waterCapacity;
+        waterAmountUI.fillAmount = 1f;
     }
 }

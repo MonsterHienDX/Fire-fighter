@@ -21,6 +21,7 @@ public class Fire : MonoBehaviour
     [SerializeField] private float regenerateDelay;
     [SerializeField] private float regenerateRate;
     private bool _isLit = true;
+    [SerializeField] private float waterNeededAmount;
     public bool isLit { get => _isLit; private set => _isLit = value; }
 
     private void Start()
@@ -49,11 +50,11 @@ public class Fire : MonoBehaviour
         }
     }
 
-    public bool TryExtinguish(float amount, Vector3 collidePoint)
+    public bool TryExtinguish(Vector3 collidePoint)
     {
         timeLastWatered = Time.time;
 
-        currentIntensity -= amount;
+        currentIntensity -= (waterNeededAmount * Time.deltaTime);
         ChangeIntensity();
         ShowSteam(collidePoint);
         if (currentIntensity <= 0)
@@ -79,6 +80,7 @@ public class Fire : MonoBehaviour
         HideSteam();
         this.GetComponent<Collider>().enabled = false;
         smokeParticleSystem.Play();
+        EventDispatcher.Instance.PostEvent(EventID.FireOut);
     }
 
     private void ShowSteam(Vector3 steamPosition)
@@ -99,5 +101,4 @@ public class Fire : MonoBehaviour
         // var burst = emission.GetBurst(0);
         // burst.cycleCount = 1;
     }
-
 }

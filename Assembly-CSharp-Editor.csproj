@@ -38,6 +38,18 @@
   <ItemGroup>
      <Compile Include="Assets\_ImportedAssets\Shared\Ramps\Editor\RampAssetEditor.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs" />
+     <Compile Include="Assets\OmniShade\Scripts\Editor\OmniShadeMenu.cs" />
+     <Compile Include="Assets\OmniShade\Scripts\Editor\OmniShadePreprocess.cs" />
+     <Compile Include="Assets\OmniShade\Scripts\Editor\OmniShadeGUI.cs" />
+     <Compile Include="Assets\PlayerPrefsEditor\Editor\PreferencesEditor\PreferencesEditorWindow.cs" />
+     <Compile Include="Assets\PlayerPrefsEditor\Editor\PreferencesEditor\RegistryMonitor.cs" />
+     <Compile Include="Assets\PlayerPrefsEditor\Editor\Dialogs\TextValidator.cs" />
+     <Compile Include="Assets\PlayerPrefsEditor\Editor\Styles.cs" />
+     <Compile Include="Assets\PlayerPrefsEditor\Editor\Dialogs\TextFieldDialog.cs" />
+     <Compile Include="Assets\PlayerPrefsEditor\Editor\PreferencesEditor\PreferenceStorageAccessor.cs" />
+     <Compile Include="Assets\PlayerPrefsEditor\Editor\Extensions\CenterOnWindow.cs" />
+     <Compile Include="Assets\PlayerPrefsEditor\Editor\PreferencesEditor\PreferenceEntryHolder.cs" />
+     <Compile Include="Assets\PlayerPrefsEditor\Editor\PreferencesEditor\PreferenceEntry.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -289,6 +301,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
         <HintPath>C:\Users\unity\Unity Projects\Fire Fighter\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+        <HintPath>C:\Users\unity\Unity Projects\Fire Fighter\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenEditor">
+        <HintPath>C:\Users\unity\Unity Projects\Fire Fighter\Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
         <HintPath>C:\Users\unity\Unity Projects\Fire Fighter\Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
@@ -739,9 +757,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{abae7787-4a6a-0bf7-e395-1eb68d45720b}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{24e2d8d5-c8b6-b766-f2ea-81bb74b6dc74}</Project>
       <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
+      <Project>{57191baa-722f-bf59-cc21-b4790144cd2c}</Project>
+      <Name>Assembly-CSharp-Editor-firstpass</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
