@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
-    [SerializeField] private List<GameObject> levelPrefabList = new List<GameObject>();
+    [SerializeField] private List<LevelInfo> levelPrefabList = new List<LevelInfo>();
     [SerializeField] private Transform levelRootTransform;
 
-    private GameObject currentLevel;
-    private GameObject currentLevelPrefab;
+    private LevelInfo currentLevel;
+    // private GameObject currentLevelPrefab;
     private List<Fire> fireLevelList = new List<Fire>();
     private int fireCount;
     public bool isPlaying;
@@ -82,12 +82,13 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public void LoadLevel()
     {
         winLoseText.enabled = false;
+        isPlaying = true;
 
         if (levelRootTransform.childCount > 0)
             Destroy(levelRootTransform.GetChild(0).gameObject);
 
         currentLevel = Instantiate(levelPrefabList.PickRandom());
-        currentLevelPrefab = currentLevel;
+        // currentLevelPrefab = currentLevel;
         currentLevel.transform.SetParent(levelRootTransform);
 
         fireLevelList.Clear();
@@ -105,7 +106,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         {
             Destroy(levelRootTransform.GetChild(0));
         }
-        currentLevelPrefab = null;
+        // currentLevelPrefab = null;
         LoadLevel();
     }
 
@@ -116,7 +117,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
             Destroy(levelRootTransform.GetChild(0));
         }
 
-        currentLevel = Instantiate(currentLevelPrefab);
+        // currentLevel = Instantiate(currentLevelPrefab);
         currentLevel.transform.SetParent(levelRootTransform);
     }
 }

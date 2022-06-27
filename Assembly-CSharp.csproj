@@ -36,45 +36,49 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\_Scripts\Fire.cs" />
-     <Compile Include="Assets\_ImportedAssets\Shared\Scripts\ProximityActivate.cs" />
-     <Compile Include="Assets\_ImportedAssets\Shared\Ramps\Runtime\RampAsset.cs" />
-     <Compile Include="Assets\_ImportedAssets\Shared\Scripts\SimpleCameraController.cs" />
-     <Compile Include="Assets\_Scripts\Extinguisher.cs" />
-     <Compile Include="Assets\_ImportedAssets\Shared\Scripts\SimpleCharacterMotor.cs" />
-     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-     <Compile Include="Assets\_ImportedAssets\Shared\Scripts\AdjustTimeScale.cs" />
-     <Compile Include="Assets\_ImportedAssets\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
-     <Compile Include="Assets\OmniShade\Scripts\OmniShade.cs" />
-     <Compile Include="Assets\OmniShade\Scripts\OmniShadeAnimateTexture.cs" />
-     <Compile Include="Assets\_Scripts\GameManager.cs" />
-     <Compile Include="Assets\PlayerPrefsEditor\Samples\SampleScene\PlayerPrefsController.cs" />
-     <Compile Include="Assets\_Scripts\Utility\SingletonMonoBehaviour.cs" />
-     <Compile Include="Assets\_Scripts\AnimUI_DOTween\MoveAheadThenBack.cs" />
-     <Compile Include="Assets\PlayerPrefsEditor\Editor Resources\ImageManager.cs" />
-     <Compile Include="Assets\_Scripts\AnimUI_DOTween\PointingSomethings.cs" />
-     <Compile Include="Assets\_Scripts\AnimUI_DOTween\ShakingSometimes.cs" />
-     <Compile Include="Assets\_Scripts\Const\Const.cs" />
-     <Compile Include="Assets\_Scripts\AnimUI_DOTween\ScalingSometimes.cs" />
-     <Compile Include="Assets\Vibration-master\Vibration.cs" />
-     <Compile Include="Assets\_Scripts\Const\Structs.cs" />
-     <Compile Include="Assets\_Scripts\Utility\CommonFunctions.cs" />
-     <Compile Include="Assets\_Scripts\Const\Enums.cs" />
-     <Compile Include="Assets\_Scripts\AnimUI_DOTween\ButtonAnimation.cs" />
-     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\DontDestroyOnLoad.cs" />
-     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\Singleton.cs" />
-     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\UnityMainThreadDispatcher.cs" />
-     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\RegisterListener\EventID.cs" />
-     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\SingletonScriptableObject.cs" />
-     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\Algorithm.cs" />
-     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\RegisterListener\Common.cs" />
-     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\SingletonObject.cs" />
-     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\SimpleJSON.cs" />
      <Compile Include="Assets\ImoSysSDK\Scripts\Utils\DestroyIfProd.cs" />
-     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\Utilities.cs" />
+     <Compile Include="Assets\_Scripts\AnimUI_DOTween\ShakingSometimes.cs" />
+     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\RegisterListener\EventID.cs" />
+     <Compile Include="Assets\_Scripts\Const\Structs.cs" />
+     <Compile Include="Assets\_Scripts\Core\Fire.cs" />
+     <Compile Include="Assets\_Scripts\Const\Enums.cs" />
+     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\DontDestroyOnLoad.cs" />
+     <Compile Include="Assets\_ImportedAssets\Shared\Scripts\ProximityActivate.cs" />
+     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\SingletonScriptableObject.cs" />
+     <Compile Include="Assets\Shaders\CurveMap\WorldCurver.cs" />
      <Compile Include="Assets\ImoSysSDK\Scripts\Utils\RegisterListener\EventDispatcher.cs" />
+     <Compile Include="Assets\_ImportedAssets\Shared\Ramps\Runtime\RampAsset.cs" />
+     <Compile Include="Assets\_Scripts\AnimUI_DOTween\PointingSomethings.cs" />
+     <Compile Include="Assets\_ImportedAssets\Shared\Scripts\SimpleCameraController.cs" />
      <Compile Include="Assets\ImoSysSDK\Scripts\Utils\DontLogIfProd.cs" />
+     <Compile Include="Assets\PlayerPrefsEditor\Samples\SampleScene\PlayerPrefsController.cs" />
+     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\Algorithm.cs" />
+     <Compile Include="Assets\_Scripts\Const\Const.cs" />
+     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\RegisterListener\Common.cs" />
+     <Compile Include="Assets\_Scripts\Core\Extinguisher.cs" />
+     <Compile Include="Assets\OmniShade\Scripts\OmniShadeAnimateTexture.cs" />
+     <Compile Include="Assets\_ImportedAssets\Shared\Scripts\SimpleCharacterMotor.cs" />
      <Compile Include="Assets\_Scripts\Utility\ExtensionClass.cs" />
+     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\Utilities.cs" />
+     <Compile Include="Assets\_Scripts\AnimUI_DOTween\MoveAheadThenBack.cs" />
+     <Compile Include="Assets\_Scripts\Utility\RandomCurveMapDir.cs" />
+     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\SingletonObject.cs" />
+     <Compile Include="Assets\PlayerPrefsEditor\Editor Resources\ImageManager.cs" />
+     <Compile Include="Assets\_Scripts\Utility\CommonFunctions.cs" />
+     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\SimpleJSON.cs" />
+     <Compile Include="Assets\_ImportedAssets\Shared\Scripts\AdjustTimeScale.cs" />
+     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\UnityMainThreadDispatcher.cs" />
+     <Compile Include="Assets\OmniShade\Scripts\OmniShade.cs" />
+     <Compile Include="Assets\ImoSysSDK\Scripts\Utils\Singleton.cs" />
+     <Compile Include="Assets\_Scripts\AnimUI_DOTween\ScalingSometimes.cs" />
+     <Compile Include="Assets\_ImportedAssets\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
+     <Compile Include="Assets\Vibration-master\Vibration.cs" />
+     <Compile Include="Assets\_Scripts\Core\GameManager.cs" />
+     <Compile Include="Assets\_Scripts\Utility\SingletonMonoBehaviour.cs" />
+     <Compile Include="Assets\_Scripts\AnimUI_DOTween\ButtonAnimation.cs" />
+     <Compile Include="Assets\_Scripts\Core\FireTruck.cs" />
+     <Compile Include="Assets\_Scripts\Core\LevelInfo.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\OmniShade\Shaders\OmniShadeCore.cginc" />
@@ -82,6 +86,7 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\_ImportedAssets\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
      <None Include="Assets\OmniShade\Shaders\OmniShade URP.shader" />
+     <None Include="Assets\Shaders\CurveMap\CurvedCode.cginc" />
      <None Include="Assets\_ImportedAssets\EffectExamples\Misc Effects\Prefabs\Readme_Dissolve_Respawn_.txt" />
      <None Include="Assets\_ImportedAssets\laxer tree pkg\README.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
@@ -101,6 +106,7 @@
      <None Include="Assets\_ImportedAssets\EffectExamples\Misc Effects\Shaders\FireFly.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+     <None Include="Assets\Shaders\CurveMap\CurvedUnlit.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\OmniShade\Shaders\OmniShade Triplanar.shader" />
      <None Include="Assets\_ImportedAssets\EffectExamples\Misc Effects\Shaders\Dissolve.shader" />
@@ -318,11 +324,11 @@
     <Reference Include="UnityEditor.UnityConnectModule">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.25f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-        <HintPath>C:\Users\unity\Unity Projects\Fire Fighter\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="DOTween">
         <HintPath>C:\Users\unity\Unity Projects\Fire Fighter\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+        <HintPath>C:\Users\unity\Unity Projects\Fire Fighter\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.25f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

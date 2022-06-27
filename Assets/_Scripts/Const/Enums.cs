@@ -56,3 +56,12 @@ public enum Difficult
     HARDVII,
     HARDVIII,
 }
+
+public enum MapDirection
+{
+    Straight,
+    Up,
+    Down,
+    Left,
+    Right,
+}

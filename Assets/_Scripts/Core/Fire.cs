@@ -9,8 +9,6 @@ public class Fire : MonoBehaviour
     private float startIntensity;
     private Vector3 startFireScale;
 
-
-
     [SerializeField] private ParticleSystem steamParticleSystem;
     private float startIntensitiesSteam;
     private ParticleSystemRenderer steamParticleRenderer;
@@ -24,7 +22,7 @@ public class Fire : MonoBehaviour
     [SerializeField] private float waterNeededAmount;
     public bool isLit { get => _isLit; private set => _isLit = value; }
 
-    private void Start()
+    private void Awake()
     {
         startIntensity = fireParticleSystem.emission.rateOverTime.constant;
         startFireScale = fireParticleSystem.gameObject.transform.localScale;
@@ -34,7 +32,10 @@ public class Fire : MonoBehaviour
         steamEmission.enabled = false;
         steamParticleRenderer = steamParticleSystem.gameObject.GetComponent<ParticleSystemRenderer>();
         steamParticleRenderer.enabled = false;
+    }
 
+    private void Start()
+    {
         smokeParticleSystem.Pause();
     }
 
