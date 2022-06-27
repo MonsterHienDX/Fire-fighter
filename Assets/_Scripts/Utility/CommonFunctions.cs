@@ -27,4 +27,10 @@ public class CommonFunctions : MonoBehaviour
     {
         audioSource.PlayOneShot(audioClip);
     }
+
+    // public static void PlayASoundIndependence(AudioSource audioSource, AudioClip audioClip)
+    // {
+
+    // }
+
 }

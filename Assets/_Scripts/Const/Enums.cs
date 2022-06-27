@@ -1,4 +1,6 @@
-﻿public enum LetterState
+﻿using UnityEngine;
+
+public enum LetterState
 {
     Correct = 0,
     Incorrect = 1,
@@ -64,4 +66,21 @@ public enum MapDirection
     Down,
     Left,
     Right,
+}
+
+public enum SoundName
+{
+    BigFire,
+    SmallFire,
+    Watering,
+    SteamWatering,
+    SteamEndWater,
+}
+
+[System.Serializable]
+public struct SoundInfo
+{
+    public SoundName soundName;
+    public AudioClip audioClip;
+    [Range(0f, 1f)] public float volume;
 }

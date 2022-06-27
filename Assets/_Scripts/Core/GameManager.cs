@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
-    [SerializeField] private List<LevelInfo> levelPrefabList = new List<LevelInfo>();
+    [SerializeField] private List<GameObject> levelPrefabList = new List<GameObject>();
     [SerializeField] private Transform levelRootTransform;
 
-    private LevelInfo currentLevel;
-    // private GameObject currentLevelPrefab;
+    private GameObject currentLevel;
+    private GameObject currentLevelPrefab;
     private List<Fire> fireLevelList = new List<Fire>();
     private int fireCount;
     public bool isPlaying;
@@ -88,7 +88,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
             Destroy(levelRootTransform.GetChild(0).gameObject);
 
         currentLevel = Instantiate(levelPrefabList.PickRandom());
-        // currentLevelPrefab = currentLevel;
+        currentLevelPrefab = currentLevel;
         currentLevel.transform.SetParent(levelRootTransform);
 
         fireLevelList.Clear();

@@ -21,7 +21,7 @@ public class Fire : MonoBehaviour
     private bool _isLit = true;
     [SerializeField] private float waterNeededAmount;
     public bool isLit { get => _isLit; private set => _isLit = value; }
-
+    private AudioSource audioSource;
     private void Awake()
     {
         startIntensity = fireParticleSystem.emission.rateOverTime.constant;
@@ -32,13 +32,15 @@ public class Fire : MonoBehaviour
         steamEmission.enabled = false;
         steamParticleRenderer = steamParticleSystem.gameObject.GetComponent<ParticleSystemRenderer>();
         steamParticleRenderer.enabled = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
         smokeParticleSystem.Pause();
-    }
 
+        PlayFireSound();
+    }
 
     private void Update()
     {
@@ -82,6 +84,7 @@ public class Fire : MonoBehaviour
         this.GetComponent<Collider>().enabled = false;
         smokeParticleSystem.Play();
         EventDispatcher.Instance.PostEvent(EventID.FireOut);
+        StartCoroutine(PlayEndingSound());
     }
 
     private void ShowSteam(Vector3 steamPosition)
@@ -92,6 +95,7 @@ public class Fire : MonoBehaviour
         emission.rateOverTime = 1.0f * startIntensitiesSteam;
         steamParticleSystem.transform.position = steamPosition;
         // steamParticleSystem.transform.localPosition = new Vector3(steamParticleSystem.transform.localPosition.x, 0, steamParticleSystem.transform.localPosition.z);
+        // PlaySteamSound();
     }
 
     private void HideSteam()
@@ -101,5 +105,33 @@ public class Fire : MonoBehaviour
 
         // var burst = emission.GetBurst(0);
         // burst.cycleCount = 1;
+        PlayFireSound();
+    }
+
+    private void PlayFireSound()
+    {
+        audioSource.clip = transform.localScale.x > 1 ? AudioManager.instance.GetSoundByName(SoundName.BigFire) : AudioManager.instance.GetSoundByName(SoundName.SmallFire);
+        audioSource.Play();
+        audioSource.loop = true;
+    }
+
+    private void PlaySteamSound()
+    {
+        audioSource.clip = AudioManager.instance.GetSoundByName(SoundName.SteamWatering);
+        audioSource.loop = false;
+        audioSource.PlayOneShot(audioSource.clip);
+    }
+
+    private IEnumerator PlayEndingSound()
+    {
+        audioSource.Stop();
+        // audioSource.enabled = false;
+
+        // audioSource.clip = AudioManager.instance.GetSoundByName(SoundName.SteamEndWater);
+        AudioManager.instance.PlayOneShotASound(SoundName.SteamEndWater);
+
+        yield return new WaitUntil(() => !audioSource.isPlaying);
+        audioSource.Stop();
+
     }
 }

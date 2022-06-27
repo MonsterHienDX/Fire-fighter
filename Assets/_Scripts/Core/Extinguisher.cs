@@ -14,12 +14,23 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
 
     private float currentWaterAmount;
     [SerializeField] private Image waterAmountUI;
-
     private float startWaterIntensity;
+    private AudioSource audioSource;
+    private AudioClip wateringSound;
+    private AudioClip endWaterSound;
+    protected override void Awake()
+    {
+        base.Awake();
+
+
+    }
 
     private void Start()
     {
-        Application.targetFrameRate = 60;
+        audioSource = GetComponent<AudioSource>();
+        wateringSound = AudioManager.instance.GetSoundByName(SoundName.Watering);
+        endWaterSound = AudioManager.instance.GetSoundByName(SoundName.SteamEndWater);
+
         currentWaterAmount = waterCapacity;
         startWaterIntensity = waterParticleSystem.emission.rateOverTime.constant;
         waterParticleRenderer = waterParticleSystem.gameObject.GetComponent<ParticleSystemRenderer>();
@@ -72,24 +83,21 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
             if (fire.isLit)
                 fire.TryExtinguish(hit.point);
         }
+        PlayWateringSound();
+
         Debug.DrawRay(waterTapTransform.position, waterTapTransform.forward * 1000, Color.red);
     }
 
     private void StopWater()
     {
-        if (useTurnOnRenderer)
-        {
-            waterParticleRenderer.enabled = false;
-        }
-        else
-        {
-            var emission = waterParticleSystem.emission;
-            emission.rateOverTime = 0.0f * startWaterIntensity;
-            var burst = emission.GetBurst(0);
-            burst.count = 0;
-            // burst.cycleCount = 1;
-            emission.SetBurst(0, burst);
-        }
+        var emission = waterParticleSystem.emission;
+        emission.rateOverTime = 0.0f * startWaterIntensity;
+        var burst = emission.GetBurst(0);
+        burst.count = 0;
+        // burst.cycleCount = 1;
+        emission.SetBurst(0, burst);
+        // PlayEndWaterSound();
+        PauseWateringSound();
     }
 
     private void SetWaterTapDirection()
@@ -113,5 +121,25 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
     {
         currentWaterAmount = waterCapacity;
         waterAmountUI.fillAmount = 1f;
+    }
+
+    private void PlayWateringSound()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = wateringSound;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+    }
+
+    private void PauseWateringSound()
+    {
+        audioSource.Pause();
+    }
+
+    private void PlayEndWaterSound()
+    {
+        CommonFunctions.PlayOneShotASound(audioSource, endWaterSound);
     }
 }

@@ -79,6 +79,8 @@
      <Compile Include="Assets\_Scripts\AnimUI_DOTween\ButtonAnimation.cs" />
      <Compile Include="Assets\_Scripts\Core\FireTruck.cs" />
      <Compile Include="Assets\_Scripts\Core\LevelInfo.cs" />
+     <Compile Include="Assets\_Scripts\Core\AudioManager.cs" />
+     <Compile Include="Assets\_Scripts\Controll\JoyStick.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\OmniShade\Shaders\OmniShadeCore.cginc" />
