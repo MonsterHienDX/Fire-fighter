@@ -1,4 +1,4 @@
-﻿public static class Const
+﻿public static class Constant
 {
     public const char KEY_SPLIT_DATA = '|';
     public const int WEAK_VIBRATE_INTENSITY = 20;
@@ -8,4 +8,5 @@
     public const int FPS = 60;
     public const int WORD_LENGTH = 5;
     public const int AMOUNT_OF_ROWS = 6;
+    public const float PANEL_POPUP_HIDE_POS_Y = 3000;
 }

@@ -27,14 +27,14 @@ public class PointingSomethings : MonoBehaviour
 
     public void StartMove()
     {
-        _canvasGroup.DOFade(1f, Const.PANEL_SLIDE_SPEED);
+        _canvasGroup.DOFade(1f, Constant.PANEL_SLIDE_SPEED);
         _rectTransform.DOAnchorPos(endValue, duration)
             .SetLoops(-1, LoopType.Yoyo);
     }
 
     public void StopMove()
     {
-        _canvasGroup.DOFade(0f, Const.PANEL_SLIDE_SPEED);
+        _canvasGroup.DOFade(0f, Constant.PANEL_SLIDE_SPEED);
     }
 
 

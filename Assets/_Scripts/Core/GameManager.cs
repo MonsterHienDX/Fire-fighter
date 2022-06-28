@@ -12,10 +12,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     private GameObject currentLevel;
     private GameObject currentLevelPrefab;
     private List<Fire> fireLevelList = new List<Fire>();
-    private int fireCount;
-    public bool isPlaying;
+    private int fireCountInLevel;
 
-    [SerializeField] private Text winLoseText;
+    public bool isPlaying { get => _isPlaying; private set => _isPlaying = value; }
+    private bool _isPlaying;
 
     private void OnEnable()
     {
@@ -37,8 +37,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     private void ReduceFire(object param = null)
     {
-        if (fireCount > 1)
-            fireCount--;
+        if (fireCountInLevel > 1)
+            fireCountInLevel--;
         else
         {
             _ = WinLevel();
@@ -52,7 +52,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     private async UniTask LoseLevel()
     {
-        ShowPanelEndLevel(false);
+        EventDispatcher.Instance.PostEvent(EventID.EndLevel, false);
         isPlaying = false;
         await UniTask.Delay(2000);
         LoadLevel();
@@ -60,30 +60,18 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     private async UniTask WinLevel()
     {
-        ShowPanelEndLevel(true);
+        EventDispatcher.Instance.PostEvent(EventID.EndLevel, true);
         isPlaying = false;
         await UniTask.Delay(2000);
         LoadLevel();
-    }
-
-    private void ShowPanelEndLevel(bool isWin)
-    {
-        winLoseText.enabled = true;
-        if (isWin)
-        {
-            winLoseText.text = "Congratulation!";
-        }
-        else
-        {
-            winLoseText.text = "Game over!";
-        }
     }
 
     public void LoadLevel()
     {
         if (isPlaying) return;
 
-        winLoseText.enabled = false;
+        EventDispatcher.Instance.PostEvent(EventID.LoadLevel);
+
         isPlaying = true;
 
         if (levelRootTransform.childCount > 0)
@@ -98,7 +86,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         {
             fireLevelList.Add(f);
         }
-        fireCount = fireLevelList.Count;
+        fireCountInLevel = fireLevelList.Count;
         Extinguisher.instance.ReFillWater();
     }
 

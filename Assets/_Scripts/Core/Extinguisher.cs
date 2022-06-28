@@ -20,6 +20,7 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
     private AudioClip endWaterSound;
 
     // [SerializeField] private FireWaterButton fireWaterButton;
+    [SerializeField] private float controlSensitivity;
 
     protected override void Awake()
     {
@@ -115,8 +116,8 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
 
         Vector2 joyVector = JoyStick.instance.GetJoyVector();
         Vector3 _newForward = new Vector3(
-            waterTapTransform.forward.x + joyVector.x / 100,
-            waterTapTransform.forward.y + joyVector.y / 100,
+            waterTapTransform.forward.x + joyVector.x / controlSensitivity,
+            waterTapTransform.forward.y + joyVector.y / controlSensitivity,
             waterTapTransform.forward.z
         );
 
