@@ -4,21 +4,14 @@ using UnityEngine;
 
 public class JoyStick : SingletonMonobehaviour<JoyStick>
 {
-    [SerializeField]
-    Transform Root, Pad;
-    [SerializeField]
-    float MaxR = 1;
+    [SerializeField] private Transform Root, Pad;
+    [SerializeField] float MaxR = 1;
 
     Vector2 Origin = new Vector2(0, 0);
-    [SerializeField]
-    bool _IsOriginSet = false;
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField] bool _IsOriginSet = false;
 
-    }
+    [SerializeField] private List<GameObject> notActiveOnObjects = new List<GameObject>();
 
-    // Update is called once per frame
     void Update()
     {
         ListenJoyStick();
@@ -27,9 +20,12 @@ public class JoyStick : SingletonMonobehaviour<JoyStick>
 
     void ListenJoyStick()
     {
+        Debug.LogWarning(GetJoyVector());
 
         if (!Input.GetMouseButton(0))
             return;
+        IgnoreObjects(notActiveOnObjects);
+
         if (!_IsOriginSet)
         {
             _IsOriginSet = true;
@@ -73,4 +69,38 @@ public class JoyStick : SingletonMonobehaviour<JoyStick>
         Vector2 tmp = (Vector2)Input.mousePosition - Origin;
         return tmp.normalized;
     }
+
+    private bool MouseOnElement(GameObject GO)
+    {
+        RectTransform rectTransform = GO.GetComponent<RectTransform>();
+        Vector3[] corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners);
+
+        float xMin = corners[0].x;
+        float xMax = corners[2].x;
+
+        float yMin = corners[0].y;
+        float yMax = corners[2].y;
+
+        if ((Input.mousePosition.x > xMax || Input.mousePosition.x < xMin)
+            ||
+            (Input.mousePosition.y > yMax || Input.mousePosition.y < yMin))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool IgnoreObjects(List<GameObject> GOList)
+    {
+        if (GOList.Count > 0)
+            foreach (GameObject go in GOList)
+            {
+                if (MouseOnElement(go))
+                    return false;
+            }
+        return true;
+    }
+
 }

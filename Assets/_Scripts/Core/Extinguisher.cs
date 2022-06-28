@@ -18,11 +18,12 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
     private AudioSource audioSource;
     private AudioClip wateringSound;
     private AudioClip endWaterSound;
+
+    // [SerializeField] private FireWaterButton fireWaterButton;
+
     protected override void Awake()
     {
         base.Awake();
-
-
     }
 
     private void Start()
@@ -43,22 +44,27 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
         if (Input.GetMouseButton(0))
         {
             SetWaterTapDirection();
-            if (currentWaterAmount > 0)
-            {
-                FireWater();
-                currentWaterAmount -= Time.deltaTime;
-                waterAmountUI.fillAmount = currentWaterAmount / waterCapacity;
-            }
-            else
-            {
-                StopWater();
-                EventDispatcher.Instance.PostEvent(EventID.OutOfWater);
-            }
+            HandleFireWater();
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             StopWater();
+        }
+    }
+
+    private void HandleFireWater()
+    {
+        if (currentWaterAmount > 0)
+        {
+            FireWater();
+            currentWaterAmount -= Time.deltaTime;
+            waterAmountUI.fillAmount = currentWaterAmount / waterCapacity;
+        }
+        else
+        {
+            StopWater();
+            EventDispatcher.Instance.PostEvent(EventID.OutOfWater);
         }
     }
 
@@ -102,10 +108,19 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
 
     private void SetWaterTapDirection()
     {
-        Vector3 lookAtPos =
-            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100));
+        // Vector3 lookAtPos =
+        //     Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100));
 
-        waterTapTransform.LookAt(Vector3.Lerp(lookAtPos, this.transform.forward, .1f));
+        // waterTapTransform.LookAt(Vector3.Lerp(lookAtPos, this.transform.forward, .1f));
+
+        Vector2 joyVector = JoyStick.instance.GetJoyVector();
+        Vector3 _newForward = new Vector3(
+            waterTapTransform.forward.x + joyVector.x / 100,
+            waterTapTransform.forward.y + joyVector.y / 100,
+            waterTapTransform.forward.z
+        );
+
+        waterTapTransform.forward = _newForward;
         // ResetGunDirection();
     }
 

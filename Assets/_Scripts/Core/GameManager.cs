@@ -47,14 +47,14 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     private void LoseByOutOfWater(object param = null)
     {
-        LoseLevel();
+        _ = LoseLevel();
     }
 
-    private void LoseLevel()
+    private async UniTask LoseLevel()
     {
         ShowPanelEndLevel(false);
         isPlaying = false;
-        // await UniTask.Delay(2000);
+        await UniTask.Delay(2000);
         LoadLevel();
     }
 
@@ -81,6 +81,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     public void LoadLevel()
     {
+        if (isPlaying) return;
+
         winLoseText.enabled = false;
         isPlaying = true;
 
