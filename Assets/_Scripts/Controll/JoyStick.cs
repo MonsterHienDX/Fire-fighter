@@ -20,8 +20,6 @@ public class JoyStick : SingletonMonobehaviour<JoyStick>
 
     void ListenJoyStick()
     {
-        Debug.LogWarning(GetJoyVector());
-
         if (!Input.GetMouseButton(0))
             return;
         IgnoreObjects(notActiveOnObjects);
@@ -67,7 +65,13 @@ public class JoyStick : SingletonMonobehaviour<JoyStick>
         if (!_IsOriginSet)
             return Vector2.zero;
         Vector2 tmp = (Vector2)Input.mousePosition - Origin;
-        return tmp.normalized;
+        Debug.LogWarning($"tmp: {tmp} | mousePos: {(Vector2)Input.mousePosition} | Origin: {Origin}");
+        Vector2 result = tmp.normalized;
+        if (Mathf.Abs(tmp.x) < 25 && Mathf.Abs(tmp.y) < 25)
+        {
+            result = Vector2.zero;
+        }
+        return result;
     }
 
     private bool MouseOnElement(GameObject GO)
