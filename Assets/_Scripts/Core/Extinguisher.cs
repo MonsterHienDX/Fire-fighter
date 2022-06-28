@@ -123,6 +123,9 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
             targetRectTransform.anchoredPosition.x + joyVector.x * controlSensitivity / 21,
             targetRectTransform.anchoredPosition.y + joyVector.y * controlSensitivity / 21
         );
+
+        Debug.LogWarning($"new position target sign: {targetRectTransform.anchoredPosition}");
+
     }
 
     private void SetWaterTapDirection()
@@ -140,6 +143,7 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
         );
 
         waterTapTransform.forward = _newForward;
+        Debug.LogWarning($"waterTapTransform.rotation.x: {waterTapTransform.localRotation.x}");
         // ResetGunDirection();
     }
 

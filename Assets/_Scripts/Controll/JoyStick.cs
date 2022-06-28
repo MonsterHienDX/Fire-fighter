@@ -65,9 +65,11 @@ public class JoyStick : SingletonMonobehaviour<JoyStick>
         if (!_IsOriginSet)
             return Vector2.zero;
         Vector2 tmp = (Vector2)Input.mousePosition - Origin;
-        Debug.LogWarning($"tmp: {tmp} | mousePos: {(Vector2)Input.mousePosition} | Origin: {Origin}");
         Vector2 result = tmp.normalized;
-        if (Mathf.Abs(tmp.x) < 25 && Mathf.Abs(tmp.y) < 25)
+        if (
+            Mathf.Abs(tmp.x) < 80
+            && Mathf.Abs(tmp.y) < 80
+        )
         {
             result = Vector2.zero;
         }
