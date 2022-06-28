@@ -230,7 +230,7 @@ RectTransform:
   m_Children:
   - {fileID: 1454534669}
   m_Father: {fileID: 419648118}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -476,6 +476,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 975729869}
   - {fileID: 205099394}
   - {fileID: 581442658}
   m_Father: {fileID: 1640199894}
@@ -593,7 +594,6 @@ RectTransform:
   - {fileID: 437966662}
   - {fileID: 282299851}
   - {fileID: 1356093599}
-  - {fileID: 975729869}
   m_Father: {fileID: 1640199894}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -663,7 +663,7 @@ RectTransform:
   m_Children:
   - {fileID: 1068423309}
   m_Father: {fileID: 419648118}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -780,7 +780,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &975729869
 RectTransform:
   m_ObjectHideFlags: 0
@@ -788,12 +788,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975729868}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 507228599}
-  m_RootOrder: 3
+  m_Father: {fileID: 419648118}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1039,7 +1039,7 @@ MonoBehaviour:
   waterCapacity: 40
   waterAmountUI: {fileID: 1537780324}
   controlSensitivity: 200
-  targetRectTransform: {fileID: 0}
+  targetRectTransform: {fileID: 975729869}
 --- !u!82 &1114128885
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6993,7 +6993,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2

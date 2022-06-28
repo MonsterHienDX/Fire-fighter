@@ -21,6 +21,7 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
 
     // [SerializeField] private FireWaterButton fireWaterButton;
     [SerializeField] private float controlSensitivity;
+    [SerializeField] private RectTransform targetRectTransform;
 
     protected override void Awake()
     {
@@ -42,8 +43,16 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
 
     void Update()
     {
+        if (!GameManager.instance.isPlaying)
+        {
+            StopWater();
+            return;
+
+        }
+
         if (Input.GetMouseButton(0))
         {
+            SetTargetPosition();
             SetWaterTapDirection();
             HandleFireWater();
         }
@@ -107,6 +116,15 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
         PauseWateringSound();
     }
 
+    private void SetTargetPosition()
+    {
+        Vector2 joyVector = JoyStick.instance.GetJoyVector();
+        targetRectTransform.anchoredPosition = new Vector2(
+            targetRectTransform.anchoredPosition.x + joyVector.x * controlSensitivity / 21,
+            targetRectTransform.anchoredPosition.y + joyVector.y * controlSensitivity / 21
+        );
+    }
+
     private void SetWaterTapDirection()
     {
         // Vector3 lookAtPos =
@@ -151,6 +169,7 @@ public class Extinguisher : SingletonMonobehaviour<Extinguisher>
 
     private void PauseWateringSound()
     {
+        // Debug.LogWarning("PauseWateringSound");
         audioSource.Pause();
     }
 
